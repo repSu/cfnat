@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  cfnat:
+    image: cfnat
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./conf:/root/cfnat/conf
+    environment:
+      - CFNAT_COLO=SJC,LAX,HKG             
+      - CFNAT_PORT=1234                    
+      - CFNAT_DELAY=300                     
+    ports:
+      - "1234:1234"                      
+    restart: always                         
