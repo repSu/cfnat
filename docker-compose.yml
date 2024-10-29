@@ -2,16 +2,24 @@ version: '3.4'
 
 services:
   cfnat:
+    container_name: cfnat
     image: cfnat
     build:
       context: .
       dockerfile: ./Dockerfile
     volumes:
-      - ./conf:/root/cfnat/conf
+      - ./conf/:/root/cfnat/conf/
     environment:
-      - CFNAT_COLO=SJC,LAX,HKG             
-      - CFNAT_PORT=1234                    
-      - CFNAT_DELAY=300                     
+      # can not add spaces after comma, 
+      # i did not deal with that :)
+      - CFNAT_COLO=[SJC+LAX,HKG]             
+      - CFNAT_PORT=[1234,1235]                    
+      - CFNAT_DELAY=[300,300]                     
     ports:
-      - "1234:1234"                      
+      - "1234:1234"
+      - "1235:1235"                    
     restart: always                         
+    deploy:
+      resources:
+        limits:
+          memory: 100m  # mem limit
