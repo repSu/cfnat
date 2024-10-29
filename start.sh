@@ -46,7 +46,7 @@ for i in "${!colo_array[@]}"; do
     formatted_colo="${colo//+/,}"
     
     echo "start cfnat, colo: $formatted_colo, port: $port, delay: $delay"
-    ./cfnat -colo "$formatted_colo" -port "$port" -delay "$delay" -ips 4 -addr "0.0.0.0:$port" &
+    ./cfnat -colo "$formatted_colo" -port 443 -delay "$delay" -ips 4 -addr "0.0.0.0:$port" &
 done
 
 wait
